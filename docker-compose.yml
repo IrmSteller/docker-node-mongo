@@ -1,0 +1,28 @@
+version: '3'
+services:
+  app:
+    container_name: docker-node-mongo
+    restart: always
+    build: .
+    ports:
+      - '3000:3000'
+    links:
+      - mongo
+  mongo:
+    container_name: mongo2
+    image: mongo
+    ports:
+      - '27017:27017'
+  mysql:
+    container_name: mysql
+    image: mysql:latest
+    volumes:
+      - "./.mysql-data/db:/var/lib/mysql"
+    restart: always
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: lubu
+      MYSQL_DATABASE: lubu
+      MYSQL_USER: lubu
+      MYSQL_PASSWORD: lubu
